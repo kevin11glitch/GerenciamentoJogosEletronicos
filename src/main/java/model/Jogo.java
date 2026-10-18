@@ -114,11 +114,11 @@ public class Jogo {
     public String toString() {
         return "Id: " + this.id +
                 "\nTitulo: " + this.titulo + 
-                "\n Descricao: " + this.descricao +
-                "\n Plataforma: " + this.plataforma +
-                "\n Genero: " + this.genero +
-                "\n Preco: " + this.preco +
-                "\n Ativo: " + (this.ativo ? "Sim" : "Nao");
+                "\nDescricao: " + this.descricao +
+                "\nPlataforma: " + this.plataforma +
+                "\nGenero: " + this.genero +
+                "\nPreco: " + this.preco +
+                "\nAtivo: " + (this.ativo ? "Sim" : "Nao");
         
     }
     

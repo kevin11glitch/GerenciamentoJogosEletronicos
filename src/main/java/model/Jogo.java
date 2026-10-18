@@ -15,18 +15,17 @@ public class Jogo {
     private String plataforma;
     private String genero;
     private double preco;
-    private boolean disponivel;
+    private boolean ativo; //jogo está ativo no catálogo
     
     public Jogo(
-        int id, String titulo, String descricao, String plataforma, String genero, double preco, boolean disponivel
+        String titulo, String descricao, String plataforma, String genero, double preco, boolean ativo
     ){
-        this.id = id;
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.plataforma = plataforma;
-        this.genero = genero;
-        this.preco = preco;
-        this.disponivel = disponivel;
+        setTitulo(titulo);
+        setDescricao(descricao);
+        setPlataforma(plataforma);
+        setGenero(genero);
+        setPreco(preco);
+        this.ativo = ativo;
     }
 
     public int getId() {
@@ -42,7 +41,13 @@ public class Jogo {
     }
 
     public void setTitulo(String titulo) {
-        this.titulo = titulo;
+        //validação para o titulo não estar vazio nem em branco
+        if(titulo == null || titulo.isBlank()){
+            throw new IllegalArgumentException(
+                "O campo Titulo precisa ser preenchido."
+            );
+        }
+        this.titulo = titulo.trim(); //remove espaços desnecessários no início e no final
     }
 
     public String getDescricao() {
@@ -50,7 +55,12 @@ public class Jogo {
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        if(descricao == null || descricao.isBlank()){
+            throw new IllegalArgumentException(
+                "O campo Descricao precisa ser preenchido."
+            );
+        }
+        this.descricao = descricao.trim();
     }
 
     public double getPreco() {
@@ -58,6 +68,11 @@ public class Jogo {
     }
 
     public void setPreco(double preco) {
+        if(preco < 0){
+            throw new IllegalArgumentException(
+                "O preco deve ser um numero valido e nao negativo."
+            );
+        }
         this.preco = preco;
     }
 
@@ -66,7 +81,12 @@ public class Jogo {
     }
 
     public void setPlataforma(String plataforma) {
-        this.plataforma = plataforma;
+        if(plataforma == null || plataforma.isBlank()){
+            throw new IllegalArgumentException(
+                "O campo Plataforma precisa ser preenchido."
+            );
+        }
+        this.plataforma = plataforma.trim();
     }
 
     public String getGenero() {
@@ -74,15 +94,32 @@ public class Jogo {
     }
 
     public void setGenero(String genero) {
-        this.genero = genero;
+        if(genero == null || genero.isBlank()){
+            throw new IllegalArgumentException(
+                "O campo Genero precisa ser preenchido."
+            );
+        }
+        this.genero = genero.trim();
     }
 
-    public boolean isDisponivel() {
-        return disponivel;
+    public boolean isAtivo() {
+        return ativo;
     }
 
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+    
+   @Override
+    public String toString() {
+        return "Id: " + this.id +
+                "\nTitulo: " + this.titulo + 
+                "\n Descricao: " + this.descricao +
+                "\n Plataforma: " + this.plataforma +
+                "\n Genero: " + this.genero +
+                "\n Preco: " + this.preco +
+                "\n Ativo: " + (this.ativo ? "Sim" : "Nao");
+        
     }
     
 }

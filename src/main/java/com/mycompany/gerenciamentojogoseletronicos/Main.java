@@ -4,6 +4,8 @@
 
 package com.mycompany.gerenciamentojogoseletronicos;
 
+import model.Jogo;
+
 /**
  *
  * @author kevin
@@ -11,6 +13,8 @@ package com.mycompany.gerenciamentojogoseletronicos;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Jogo jogo1 = new Jogo("Jogo 1", "Jogo faz tal coisa", "PS2", "Açao", 12, true);
+        
+        System.out.println(jogo1);
     }
 }

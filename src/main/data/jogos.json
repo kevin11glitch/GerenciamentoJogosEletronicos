@@ -1,0 +1,10 @@
+[
+    {
+        "titulo": "Minecraft",
+        "descricao": "Jogo SandBox de aventura.",
+        "plataforma": ["PlayStation", "Xbox", "Mobile", "Desktop"],
+        "genero": "Ação/Exploração",
+        "preco": 59.99,
+        "estoque": 8
+    }
+]

@@ -4,8 +4,14 @@
 
 package com.mycompany.gerenciamentojogoseletronicos;
 
-import model.Cliente;
+//import model.Cliente;
+
 import model.Jogo;
+import model.Cliente;
+import model.Venda;
+import model.ItemVenda;
+
+//import model.Jogo;
 
 /**
  *
@@ -14,9 +20,11 @@ import model.Jogo;
 public class Main {
 
     public static void main(String[] args) {
-        Jogo jogo1 = new Jogo("Jogo 1", "Jogo faz tal coisa", "PS2", "Açao", 12, true);
-        Cliente cliente1 = new Cliente("Joçao", "123@gmail.com");
+        int option = -1;
         
-        System.out.println(cliente1);
+        while(option != 0){
+            
+        }
+        
     }
 }

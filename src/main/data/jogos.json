@@ -1,10 +1,11 @@
 [
     {
-        "titulo": "Minecraft",
-        "descricao": "Jogo SandBox de aventura.",
-        "plataforma": ["PlayStation", "Xbox", "Mobile", "Desktop"],
-        "genero": "Ação/Exploração",
-        "preco": 59.99,
-        "estoque": 8
+    "id": 1,
+    "titulo": "Minecraft",
+    "descricao": "Jogo de sobrevivencia",
+    "plataforma": "PC",
+    "genero": "Sandbox",
+    "preco": 99.90,
+    "ativo": true
     }
 ]

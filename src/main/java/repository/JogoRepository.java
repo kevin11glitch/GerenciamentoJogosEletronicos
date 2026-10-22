@@ -4,10 +4,46 @@
  */
 package repository;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+import java.io.Reader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.lang.reflect.Type;
+import java.nio.file.Paths;
+
+import model.Jogo;
+
 /**
  *
  * @author kevin
  */
 public class JogoRepository {
+    Gson gson = new Gson();
     
+    public List<Jogo> lerJogos() throws IOException {
+        //cria a definição do tipo parametrizado
+        TypeToken<List<Jogo>> tipoLista = new TypeToken<List<Jogo>>(){};
+        
+        //caminho do arquivo JSON
+        Path path = Paths.get("src", "main", "data", "jogos.json");
+        
+        //lê o conteudo JSON do arquivo
+        try(Reader reader = Files.newBufferedReader(path)){
+            //desserializa o JSON para List<Jogo>
+            List<Jogo> listaJogos = gson.fromJson(reader, tipoLista.getType());
+        return listaJogos;
+        }
+//      
+//        for(Jogo jogo : jogos){
+//            System.out.println(jogos);
+//        }
+    
+    }
 }

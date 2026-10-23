@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.Jogo;
 
 /**
@@ -31,18 +32,44 @@ public class Main {
         
         Gson gson = new Gson();
         
-        JogoRepository jogoRepository = new JogoRepository();
         
-        try {
-            List<Jogo> jogos = jogoRepository.lerJogos();
+        int opcao = -1;
+        
+        while(opcao != 0){
+            opcao = Integer.parseInt(JOptionPane.showInputDialog("Gerenciamento de Venda de Jogos Eletronicos\n"
+                    + "1 - Cadastrar Jogo\n"
+                    + "2 - Pesquisar Jogo\n"
+                    + "3 - Visualizar Jogos\n"
+                    + "4 - Atualizar Jogo\n"
+                    + "5 - Vender Jogo\n"
+                    + "6 - Deletar Jogo\n"
+                    + "0 - Sair\n\n"
+            ));
+            switch(opcao){
+                case 1:
+                    
+                    break;
 
-            for (Jogo jogo : jogos) {
-                System.out.println(jogo);
+                case 2:
+                    break;
+                case 3:
+                    JogoRepository jogoRepository = new JogoRepository();
+        
+                    try {
+                        List<Jogo> jogos = jogoRepository.lerJogos();
+
+                        for (Jogo jogo : jogos) {
+                            JOptionPane.showMessageDialog(null, jogo);
+                        }
+
+                    } catch (IOException e) {
+                        System.out.println("Erro ao ler os jogos: " + e.getMessage());
+                    }
+                    break;
             }
-
-        } catch (IOException e) {
-            System.out.println("Erro ao ler os jogos: " + e.getMessage());
         }
+        
+        
 
         
          

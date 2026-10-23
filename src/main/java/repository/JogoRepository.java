@@ -40,10 +40,6 @@ public class JogoRepository {
             List<Jogo> listaJogos = gson.fromJson(reader, tipoLista.getType());
         return listaJogos;
         }
-//      
-//        for(Jogo jogo : jogos){
-//            System.out.println(jogos);
-//        }
-    
+
     }
 }

@@ -1,11 +1,20 @@
 [
-    {
+  {
     "id": 1,
     "titulo": "Minecraft",
     "descricao": "Jogo de sobrevivencia",
     "plataforma": "PC",
     "genero": "Sandbox",
-    "preco": 99.90,
+    "preco": 99.9,
     "ativo": true
-    }
+  },
+  {
+    "id": 0,
+    "titulo": "God of War",
+    "descricao": "Jogo de guerra",
+    "plataforma": "PlayStation",
+    "genero": "Ação",
+    "preco": 129.99,
+    "ativo": true
+  }
 ]

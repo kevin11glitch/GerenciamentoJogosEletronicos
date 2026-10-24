@@ -8,7 +8,6 @@ package com.mycompany.gerenciamentojogoseletronicos;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import model.Jogo;
 import model.Cliente;
 import model.Venda;
 import model.ItemVenda;
@@ -29,12 +28,10 @@ import model.Jogo;
 public class Main {
 
     public static void main(String[] args) {
-        
-        Gson gson = new Gson();
-        
+               
         
         int opcao = -1;
-        
+        JogoRepository jogoRepository = new JogoRepository();
         while(opcao != 0){
             opcao = Integer.parseInt(JOptionPane.showInputDialog("Gerenciamento de Venda de Jogos Eletronicos\n"
                     + "1 - Cadastrar Jogo\n"
@@ -46,15 +43,32 @@ public class Main {
                     + "0 - Sair\n\n"
             ));
             switch(opcao){
-                case 1:
+                case 1:{
+                    String titulo = JOptionPane.showInputDialog("Titulo do Jogo:");
+                    String descricao = JOptionPane.showInputDialog("Descrição do Jogo:");
+                    String plataforma = JOptionPane.showInputDialog("Plataforma comatível com o Jogo:");
+                    String genero = JOptionPane.showInputDialog("Gênero do Jogo:");
+                    double preco = Double.parseDouble(JOptionPane.showInputDialog("Preço do Jogo:"));
+                    int ativo = JOptionPane.showConfirmDialog(null, "O Jogo está ativo no catálogo?", "Confirmação", JOptionPane.YES_NO_OPTION);
                     
-                    break;
+                    boolean resposta = (ativo == JOptionPane.YES_OPTION);
+                    Jogo novoJogo = new Jogo(titulo, descricao, plataforma, genero, preco, resposta);
+                   
+                    try {
+                        jogoRepository.cadastrarJogo(novoJogo);
+                        JOptionPane.showMessageDialog(null,"Jogo cadastrado com sucesso!");
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(null, "Erro ao cadastrar jogo: " + e.getMessage());
+                    }
 
-                case 2:
                     break;
-                case 3:
-                    JogoRepository jogoRepository = new JogoRepository();
-        
+                }
+                
+                case 2:{
+                    break;
+                }
+                case 3:{
+
                     try {
                         List<Jogo> jogos = jogoRepository.lerJogos();
 
@@ -66,6 +80,7 @@ public class Main {
                         System.out.println("Erro ao ler os jogos: " + e.getMessage());
                     }
                     break;
+                }
             }
         }
         

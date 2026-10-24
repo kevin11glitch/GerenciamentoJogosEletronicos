@@ -5,12 +5,15 @@
 package repository;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 
 import java.io.Reader;
 import java.io.IOException;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -42,4 +45,23 @@ public class JogoRepository {
         }
 
     }
+    
+    public void cadastrarJogo(Jogo novoJogo) throws IOException {
+        //carrega da lista de jogos os jogos existentes no JSON
+        List<Jogo> listaJogos = lerJogos();
+        //adição do jogo novo à lista
+        listaJogos.add(novoJogo);
+        //caminho JSON
+        Path path = Paths.get("src", "main", "data", "jogos.json");
+       
+        Files.createDirectories(path.getParent());
+        //ajustar as configurações padrões do gson
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        
+        try(Writer writer = Files.newBufferedWriter(path)){
+            gson.toJson(listaJogos, writer); //serialização e gravação da nova lista no arquivo
+        }
+
+    }
+
 }

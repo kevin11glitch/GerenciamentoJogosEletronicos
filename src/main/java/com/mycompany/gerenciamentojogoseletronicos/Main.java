@@ -27,7 +27,7 @@ import model.Jogo;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
                
         
         int opcao = -1;
@@ -176,19 +176,27 @@ public class Main {
                                         boolean atualizado = jogoRepository.atualizarJogo(tituloPesquisa, jogoPesquisado);
                                         
                                         if(atualizado){
-                                            JOptionPane.showMessageDialog(null, "Jogo atualizado com sucesso!");
+                                            JOptionPane.showMessageDialog(
+                                                    null, "Jogo atualizado com sucesso!"
+                                            );
                                         }else{
-                                            JOptionPane.showMessageDialog(null, "Jogo não encontrado.");
+                                            JOptionPane.showMessageDialog(
+                                                    null, "Jogo não encontrado."
+                                            );
                                         }
                                         break;
                                     }
                                     default:
-                                        JOptionPane.showMessageDialog(null, "Digite uma opção válida.");
+                                        JOptionPane.showMessageDialog(
+                                                null, "Digite uma opção válida."
+                                        );
                                         break;
                                 }
                             }
                         }else{
-                            JOptionPane.showMessageDialog(null, "Jogo não encontrado no catálogo.");
+                            JOptionPane.showMessageDialog(
+                                    null, "Jogo não encontrado no catálogo."
+                            );
                         }
                         //tratamento para erro de leitura e escrita
                     } catch (IOException e) {
@@ -208,13 +216,50 @@ public class Main {
                 }
                 //vender
                 case 5:{
-                    
+                    break;
                 }
                 //deletar
                 case 6:{
-                    
+                    String jogoPesquisado = JOptionPane.showInputDialog("Qual jogo deseja remover do catálogo?");
+                    //validação caso "cancelar"
+                    if (jogoPesquisado == null) {
+                        break;
+                    }
+                    try{
+                        //confirmação
+                        int confirmacao = JOptionPane.showConfirmDialog(
+                            null, 
+                            "Deseja desativar o jogo do catálogo?", 
+                            "Confirmação", 
+                            JOptionPane.YES_NO_OPTION
+                        );
+                        //validações de confirmação
+                        if (confirmacao == JOptionPane.YES_OPTION) {
+                            boolean desativado = jogoRepository.desativarJogo(jogoPesquisado);
+                            if(desativado){
+                                JOptionPane.showMessageDialog(
+                                        null, "Jogo desativado com sucesso!"
+                                );
+                            }else{
+                                JOptionPane.showMessageDialog(
+                                        null, "Jogo já desativado ou não encontrado."
+                                );
+                            }
+                        }
+                    }catch (IOException e){
+                        JOptionPane.showMessageDialog(
+                                null, "Erro ao desativar jogo: " + e.getMessage()
+                        );
+                    }catch (IllegalArgumentException e) {
+                        JOptionPane.showMessageDialog(
+                            null, "Dados inválidos: " + e.getMessage()
+                        );
+                    }
+               
+                    break;  
                 }
                 case 0:{
+                    break;
                 }
             }
         }

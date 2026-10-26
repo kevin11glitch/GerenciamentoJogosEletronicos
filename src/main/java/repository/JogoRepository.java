@@ -109,5 +109,32 @@ public class JogoRepository {
         }
         return false;
     }
+    
+    public boolean desativarJogo(String tituloJogo) throws IOException{
+        if(tituloJogo == null || tituloJogo.isBlank()){
+            throw new IllegalArgumentException(
+                "Digite um titulo valido."
+            );
+        }
+
+        List<Jogo> listaJogos = lerJogos();
+        
+        for (Jogo jogo : listaJogos) {
+            
+            if (jogo.getTitulo().equalsIgnoreCase(tituloJogo.trim())) {
+                //verificação se o jogo ja esta desativado
+                if (!jogo.isAtivo()) {
+                    return false;
+                }
+                //desativa o jogo em memória
+                jogo.setAtivo(false);
+                //persiste a alteração no arquivo JSON
+                salvarJogos(listaJogos);
+                return true;
+            }
+        }
+        
+        return false;
+    }
 
 }

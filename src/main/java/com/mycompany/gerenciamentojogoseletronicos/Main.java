@@ -65,6 +65,21 @@ public class Main {
                 }
                 
                 case 2:{
+                    String tituloPesquisa = JOptionPane.showInputDialog("Digite o titulo do jogo que deseja pesquisar:");
+                    if(tituloPesquisa == null){
+                        break;
+                    }
+                    
+                    try{
+                        Jogo jogoPesquisado = jogoRepository.pesquisarJogo(tituloPesquisa);
+                        if(jogoPesquisado != null){
+                            JOptionPane.showMessageDialog(null, jogoPesquisado);
+                        }else{
+                            JOptionPane.showMessageDialog(null, "'" + tituloPesquisa + "'" + " não encontrado em nosso estoque.");
+                        }
+                    } catch(IOException e){
+                        JOptionPane.showMessageDialog(null, "Erro ao pesquisar jogo: " + e.getMessage());
+                    }
                     break;
                 }
                 case 3:{

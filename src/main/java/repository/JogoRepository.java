@@ -47,13 +47,13 @@ public class JogoRepository {
     }
     
     public void cadastrarJogo(Jogo novoJogo) throws IOException {
-        //carrega da lista de jogos os jogos existentes no JSON
+        //carrega da lista de jogos existentes no JSON
         List<Jogo> listaJogos = lerJogos();
         //adição do jogo novo à lista
         listaJogos.add(novoJogo);
         //caminho JSON
         Path path = Paths.get("src", "main", "data", "jogos.json");
-       
+       // Cria os diretórios do caminho do arquivo, caso ainda não existam
         Files.createDirectories(path.getParent());
         //ajustar as configurações padrões do gson
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -62,6 +62,24 @@ public class JogoRepository {
             gson.toJson(listaJogos, writer); //serialização e gravação da nova lista no arquivo
         }
 
+    }
+    
+    public Jogo pesquisarJogo(String tituloJogo) throws IOException{
+        if(tituloJogo == null || tituloJogo.isBlank()){
+            throw new IllegalArgumentException(
+                "Digite um titulo valido."
+            );
+        }
+        //desserialização da lista de jogos "lerJogos()"
+        List<Jogo> listaJogos = lerJogos();
+            
+        for(Jogo jogo : listaJogos){
+            if(jogo.getTitulo().equalsIgnoreCase(tituloJogo.trim())){
+                return jogo;
+            }
+        }
+        return null;
+        
     }
 
 }

@@ -46,21 +46,25 @@ public class JogoRepository {
 
     }
     
+    public void salvarJogos(List<Jogo> listaJogos) throws IOException{
+        //caminho 
+        Path path = Paths.get("src", "main", "data", "jogos.json");
+        //cria os diretórios do caminho do arquivo, caso ainda não existam
+        Files.createDirectories(path.getParent());
+        //configurações Gson
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try(Writer writer = Files.newBufferedWriter(path)){
+            gson.toJson(listaJogos, writer); //serialização e gravação da nova lista no arquivo
+        }    
+    }
+    
     public void cadastrarJogo(Jogo novoJogo) throws IOException {
         //carrega da lista de jogos existentes no JSON
         List<Jogo> listaJogos = lerJogos();
         //adição do jogo novo à lista
         listaJogos.add(novoJogo);
-        //caminho JSON
-        Path path = Paths.get("src", "main", "data", "jogos.json");
-       // Cria os diretórios do caminho do arquivo, caso ainda não existam
-        Files.createDirectories(path.getParent());
-        //ajustar as configurações padrões do gson
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        
-        try(Writer writer = Files.newBufferedWriter(path)){
-            gson.toJson(listaJogos, writer); //serialização e gravação da nova lista no arquivo
-        }
+        //salvar informações
+        salvarJogos(listaJogos);
 
     }
     
@@ -72,7 +76,8 @@ public class JogoRepository {
         }
         //desserialização da lista de jogos "lerJogos()"
         List<Jogo> listaJogos = lerJogos();
-            
+        
+        //percorrer a lista de jogos ate encontrar o jogo
         for(Jogo jogo : listaJogos){
             if(jogo.getTitulo().equalsIgnoreCase(tituloJogo.trim())){
                 return jogo;
@@ -80,6 +85,29 @@ public class JogoRepository {
         }
         return null;
         
+    }
+    
+    
+    public boolean atualizarJogo(String tituloJogo, Jogo jogoEditado) throws IOException{
+        if(tituloJogo == null || tituloJogo.isBlank()){
+            throw new IllegalArgumentException(
+                "Digite um titulo valido."
+            );
+        }
+        List<Jogo> listaJogos = lerJogos();
+        
+        for(int i = 0; i < listaJogos.size(); i++){
+            Jogo jogo = listaJogos.get(i);
+            //compara o titulo do indice pelo titulo do parametro
+            if(jogo.getTitulo().equalsIgnoreCase(tituloJogo.trim())){
+                //atualiza as informações do jogo original pelas do jogo editado
+                listaJogos.set(i, jogoEditado);
+                //persistir as alterações no JSON
+                salvarJogos(listaJogos);
+                return true;
+            }
+        }
+        return false;
     }
 
 }

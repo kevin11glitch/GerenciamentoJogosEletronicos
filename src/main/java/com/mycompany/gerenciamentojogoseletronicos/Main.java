@@ -18,6 +18,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Jogo;
+import repository.ClienteRepository;
+import view.ClienteMenu;
 import view.JogoMenu;
 
 /**
@@ -28,8 +30,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         JogoRepository jogoRepository = new JogoRepository();
+        ClienteRepository clienteRepository = new ClienteRepository();
         JogoMenu jogoMenu = new JogoMenu(jogoRepository);
-
+        ClienteMenu clienteMenu = new ClienteMenu(clienteRepository);
         while (true) {
             String entrada = JOptionPane.showInputDialog(
                     "GERENCIAMENTO DE VENDAS DE JOGOS ELETRÔNICOS\n"
@@ -51,8 +54,7 @@ public class Main {
                         break;
                     }
                     case 2: {
-                        JOptionPane.showMessageDialog(null,
-                                "Menu de clientes ainda não implementado.");
+                        clienteMenu.exibirMenu();
                         break;
                     }
                     case 3: {

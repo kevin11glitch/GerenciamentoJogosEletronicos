@@ -21,7 +21,7 @@ public class Venda {
     public Venda(Cliente cliente){
         if(cliente == null){
             throw new IllegalArgumentException(
-                "O jogo precisa ser informado."
+                "O cliente precisa ser informado"
             );
         }
         

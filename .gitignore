@@ -4,3 +4,6 @@ dist/
 nbproject/private/
 .env
 Notas*
+/src/main/data/jogos.json
+/src/main/data/clientes.json
+/src/main/data/vendas.json

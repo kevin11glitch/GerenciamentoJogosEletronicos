@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.lang.reflect.Type;
 import java.nio.file.Paths;
+import java.util.UUID;
 
 import model.Jogo;
 
@@ -28,20 +29,28 @@ import model.Jogo;
  * @author kevin
  */
 public class JogoRepository {
-    Gson gson = new Gson();
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private final Path path = Paths.get("src", "main", "data", "jogos.json");
+    
+    private void inicializarArquivo() throws IOException {
+        Files.createDirectories(path.getParent());
+
+        // Verifica se o arquivo não existe
+        if (Files.notExists(path)) {
+            Files.writeString(path, "[]");
+        }
+    }
     
     public List<Jogo> lerJogos() throws IOException {
+        inicializarArquivo();
         //cria a definição do tipo parametrizado
         TypeToken<List<Jogo>> tipoLista = new TypeToken<List<Jogo>>(){};
-        
-        //caminho do arquivo JSON
-        Path path = Paths.get("src", "main", "data", "jogos.json");
         
         //lê o conteudo JSON do arquivo
         try(Reader reader = Files.newBufferedReader(path)){
             //desserializa o JSON para List<Jogo>
             List<Jogo> listaJogos = gson.fromJson(reader, tipoLista.getType());
-        return listaJogos;
+        return listaJogos != null ? listaJogos : new ArrayList<>();
         }
 
     }
@@ -61,6 +70,8 @@ public class JogoRepository {
     public void cadastrarJogo(Jogo novoJogo) throws IOException {
         //carrega da lista de jogos existentes no JSON
         List<Jogo> listaJogos = lerJogos();
+        //geração de UUID
+        novoJogo.setId(UUID.randomUUID().toString());
         //adição do jogo novo à lista
         listaJogos.add(novoJogo);
         //salvar informações

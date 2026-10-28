@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "titulo": "Minecraft",
     "descricao": "Jogo de sobrevivencia",
     "plataforma": "PC",
@@ -9,7 +9,7 @@
     "ativo": false
   },
   {
-    "id": 0,
+    "id": "0",
     "titulo": "God of War",
     "descricao": "Jogo de guerra",
     "plataforma": "PlayStation",
@@ -18,7 +18,7 @@
     "ativo": true
   },
   {
-    "id": 0,
+    "id": "0",
     "titulo": "Sonic",
     "descricao": "Jogo de corrida",
     "plataforma": "PC",
@@ -27,12 +27,21 @@
     "ativo": true
   },
   {
-    "id": 0,
+    "id": "0",
     "titulo": "Clash Royale",
     "descricao": "Jogo de estratégia",
     "plataforma": "Mobile / PC",
     "genero": "Estratégia",
     "preco": 20.0,
     "ativo": false
+  },
+  {
+    "id": "ffd81fc5-1c5c-4963-bcc1-48e1bedeb85d",
+    "titulo": "Jogo 6",
+    "descricao": "Jogo de teste",
+    "plataforma": "PC",
+    "genero": "Ação",
+    "preco": 89.99,
+    "ativo": true
   }
 ]

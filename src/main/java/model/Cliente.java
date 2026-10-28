@@ -11,7 +11,7 @@ import util.ValidarEmail;
  * @author kevin
  */
 public class Cliente {
-    private int id;
+    private String id;
     private String nome;
     private String email;
     
@@ -22,11 +22,11 @@ public class Cliente {
         setEmail(email);
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

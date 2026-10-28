@@ -13,7 +13,7 @@ import java.util.List;
  * @author kevin
  */
 public class Venda {
-    private int id;
+    private String id;
     private Cliente cliente;
     private List<ItemVenda> itens;
     private LocalDateTime dataVenda;
@@ -30,7 +30,7 @@ public class Venda {
         this.itens = new ArrayList<>();
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

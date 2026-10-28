@@ -9,7 +9,7 @@ package model;
  * @author kevin
  */
 public class Jogo {
-    private int id;
+    private String id;
     private String titulo;
     private String descricao;
     private String plataforma;
@@ -28,11 +28,11 @@ public class Jogo {
         this.ativo = ativo;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

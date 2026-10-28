@@ -15,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import model.Cliente;
 import model.Jogo;
 
@@ -27,7 +28,7 @@ public class ClienteRepository {
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private final Path path = Paths.get("src", "main", "data", "clientes.json");
 
-    public void inicializarArquivo() throws IOException {
+    private void inicializarArquivo() throws IOException {
         Files.createDirectories(path.getParent());
 
         // Verifica se o arquivo não existe
@@ -70,6 +71,7 @@ public class ClienteRepository {
                 );
             }
         }
+        cliente.setId(UUID.randomUUID().toString());
         listaClientes.add(cliente);
         salvarCliente(listaClientes);
     }

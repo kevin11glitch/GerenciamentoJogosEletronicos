@@ -19,8 +19,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Jogo;
 import repository.ClienteRepository;
+import repository.VendaRepository;
 import view.ClienteMenu;
 import view.JogoMenu;
+import view.VendaMenu;
 
 /**
  *
@@ -29,10 +31,15 @@ import view.JogoMenu;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        //instanciar Repository's
         JogoRepository jogoRepository = new JogoRepository();
         ClienteRepository clienteRepository = new ClienteRepository();
+        VendaRepository vendaRepository = new VendaRepository();
+        //instanciar Menu's
         JogoMenu jogoMenu = new JogoMenu(jogoRepository);
         ClienteMenu clienteMenu = new ClienteMenu(clienteRepository);
+        VendaMenu vendaMenu = new VendaMenu(vendaRepository);
+        
         while (true) {
             String entrada = JOptionPane.showInputDialog(
                     "GERENCIAMENTO DE VENDAS DE JOGOS ELETRÔNICOS\n"
@@ -58,12 +65,13 @@ public class Main {
                         break;
                     }
                     case 3: {
-                        JOptionPane.showMessageDialog(null,
-                                "Menu de vendas ainda não implementado.");
+                        vendaMenu.exibirMenu();
                         break;
                     }
                     case 0: {
+                        JOptionPane.showMessageDialog(null, "Obrigado por usar o Gerenciamento de Vendas de Jogos Eletrônicos!");
                         return;
+                        
                     }
                     default: {
                         JOptionPane.showMessageDialog(null, "Digite uma opção válida.");
